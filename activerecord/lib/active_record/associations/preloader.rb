@@ -54,7 +54,10 @@ module ActiveRecord
         autoload :BelongsTo,           "active_record/associations/preloader/belongs_to"
       end
 
-      NULL_RELATION = Struct.new(:values, :where_clause, :joins_values).new({}, Relation::WhereClause.empty, [])
+      NULL_RELATION =
+        Struct
+          .new(:values, :where_clause, :joins_values, :left_outer_joins_values)
+          .new({}, Relation::WhereClause.empty, [], [])
 
       # Eager loads the named associations for the given Active Record record(s).
       #

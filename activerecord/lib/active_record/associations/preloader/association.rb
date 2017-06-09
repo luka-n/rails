@@ -143,6 +143,11 @@ module ActiveRecord
             else
               scope.joins!(reflection_scope.joins_values)
             end
+            if preload_scope.left_outer_joins_values.any?
+              scope.left_outer_joins!(preload_scope.left_outer_joins_values)
+            else
+              scope.left_outer_joins!(reflection_scope.left_outer_joins_values)
+            end
 
             if order_values = preload_values[:order] || values[:order]
               scope.order!(order_values)
